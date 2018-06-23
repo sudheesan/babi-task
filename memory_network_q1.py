@@ -94,25 +94,7 @@ def vectorize_stories(data, word_idx, story_maxlen, query_maxlen):
     return (pad_sequences(X, maxlen=story_maxlen),
             pad_sequences(Xq, maxlen=query_maxlen), np.array(Y))
 
-try:
-    path = get_file('babi-tasks-v1-2.tar.gz', origin='https://s3.amazonaws.com/text-datasets/babi_tasks_1-20_v1-2.tar.gz')
-except:
-    print('Error downloading dataset, please download it manually:\n'
-          '$ wget http://www.thespermwhale.com/jaseweston/babi/tasks_1-20_v1-2.tar.gz\n'
-          '$ mv tasks_1-20_v1-2.tar.gz ~/.keras/datasets/babi-tasks-v1-2.tar.gz')
-    raise
-tar = tarfile.open(path)
 
-challenges = {
-    # QA1 with 10,000 samples
-    'single_supporting_fact_10k': 'tasks_1-20_v1-2/en-10k/qa1_single-supporting-fact_{}.txt',
-    # QA2 with 10,000 samples
-    'two_supporting_facts_10k': 'tasks_1-20_v1-2/en-10k/qa2_two-supporting-facts_{}.txt',
-}
-challenge_type = 'single_supporting_fact_10k'
-challenge = challenges[challenge_type]
-
-print('Extracting stories for the challenge:', challenge_type)
 
 train_stories = get_stories(open('tasks_1-20_v1-2/en-10k/qa1_single-supporting-fact_train.txt','r'))
 test_stories = get_stories(open('tasks_1-20_v1-2/en-10k/qa1_single-supporting-fact_test.txt','r'))
@@ -293,12 +275,3 @@ for key, val in word_idx.items():
 print("Machine answer is: ", k)
 print("I am ", pred_results[n][val_max], "certain of it")
 
-## Read my own file
-
-# f = open(r"C:\Users\priya\Documents\my_dl\qachatbot\my_test_q2.txt", "r")
-# print(f.readlines())
-# data = parse_stories(f.readlines(), only_supporting=False)
-# print(data)
-# extra_stories = get_stories(f, only_supporting=False, max_length=None)
-#
-# print(extra_stories)
