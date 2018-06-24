@@ -240,7 +240,7 @@ model_json = model.to_json()
 with open("model_1.json", "w") as json_file:
     json_file.write(model_json)
 
-model_path1 = r'E:\PyhtonScripts\BABI\babi_chatbot_priya\model1.h5'
+model_path1 = r'model1.h5'
 model.save(model_path1)
 #model save as pickle file
 # model load again
