@@ -5,10 +5,6 @@ from keras.models import model_from_json
 from functools import reduce
 import numpy as np
 import re
-from flask import Flask, request,jsonify
-
-app = Flask(__name__)
-print(app)
 
 def tokenize(sent):
     
@@ -99,23 +95,3 @@ def getAnswer(parsed_stories):
         if val == val_max:
             k = key
     return k
-    
-    
-@app.route('/')
-def index():
-    return "Hello, World!"
-
-@app.route('/post', methods=['POST'])
-def post_route():
-    if request.method == 'POST':
-
-        data = request.get_json()
-        inputStory = data['story']
-        inputQuestion = data['question']
-        parsed_stories = parse_input_story(inputStory,inputQuestion)
-        result = getAnswer(parsed_stories)
-        return jsonify({'Answer': result})
-
-
-if __name__ == '__main__':
-    app.run(port=5000)
