@@ -252,6 +252,7 @@ pred_results = model.predict(([inputs_test, queries_test]))
 # Display a selected test story
 
 n = np.random.randint(0,1000)
+
 story_list = test_stories[n][0]
 story =' '.join(word for word in story_list)
 print("Story is:",story)
